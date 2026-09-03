@@ -1,0 +1,13 @@
+{
+  "name": "Neon Campus",
+  "colors": {
+    "bg1": "#160A29", "bg2": "#210E38", "card": "#22103C",
+    "border": "rgba(255,255,255,0.10)", "text": "#F5EEFF", "textDim": "#9C87C4",
+    "accent": "#FF5FA2", "accent2": "#5FE3FF", "progressTrack": "rgba(255,255,255,0.12)"
+  },
+  "background": { "type": "gradient", "angle": 140, "image": null, "fit": "cover", "dim": 0 },
+  "font": { "display": "rounded-friendly", "label": "rounded-friendly" },
+  "radius": 10,
+  "particles": { "enabled": true, "type": "confetti", "color": "#FF5FA2", "color2": "#5FE3FF", "density": 26, "speed": 1.1 },
+  "sounds": { "tick": null, "tickEnabled": false, "classChange": null, "classChangeEnabled": true, "music": null, "musicVolume": 0.4 }
+}
