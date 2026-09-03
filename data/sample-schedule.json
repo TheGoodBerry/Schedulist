@@ -1,0 +1,16 @@
+{
+  "name": "Sample Weekday Schedule",
+  "skipDates": [],
+  "periods": [
+    { "name": "Homeroom", "start": "08:00", "end": "08:10", "days": ["mon","tue","wed","thu","fri"], "kind": "break" },
+    { "name": "Period 1 — Algebra II", "start": "08:15", "end": "09:05", "days": ["mon","tue","wed","thu","fri"], "kind": "class" },
+    { "name": "Period 2 — Chemistry", "start": "09:10", "end": "10:00", "days": ["mon","tue","wed","thu","fri"], "kind": "class" },
+    { "name": "Passing / Break", "start": "10:00", "end": "10:10", "days": ["mon","tue","wed","thu","fri"], "kind": "break" },
+    { "name": "Period 3 — World History", "start": "10:10", "end": "11:00", "days": ["mon","tue","wed","thu","fri"], "kind": "class" },
+    { "name": "Period 4 — English Lit", "start": "11:05", "end": "11:55", "days": ["mon","tue","wed","thu","fri"], "kind": "class" },
+    { "name": "Lunch", "start": "11:55", "end": "12:35", "days": ["mon","tue","wed","thu","fri"], "kind": "break" },
+    { "name": "Period 5 — Studio Art", "start": "12:40", "end": "13:30", "days": ["mon","tue","wed","thu","fri"], "kind": "class" },
+    { "name": "Period 6 — Physics", "start": "13:35", "end": "14:25", "days": ["mon","tue","wed","thu","fri"], "kind": "class" },
+    { "name": "Period 7 — PE", "start": "14:30", "end": "15:15", "days": ["mon","tue","wed","thu","fri"], "kind": "class" }
+  ]
+}
