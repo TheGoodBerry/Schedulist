@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schedulist</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gradient">
+  <div id="bgImageLayer" aria-hidden="true"></div>
+  <div id="bgDimLayer" aria-hidden="true"></div>
+  <div id="particleCanvasWrap" aria-hidden="true"><canvas id="particleCanvas"></canvas></div>
+
+  <div class="app" id="appRoot">
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark">SL</span>
+        <span class="brand-name">Schedulist</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="fullscreenBtn" title="Fullscreen / kiosk (f)" aria-label="Toggle fullscreen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        </button>
+        <button class="icon-btn" id="settingsBtn" title="Settings (s)" aria-label="Open settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.6V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.6 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </button>
+      </div>
+      <div class="clock-block">
+        <div class="clock-time" id="clockTime">--:--:--</div>
+        <div class="clock-date" id="clockDate">—</div>
+      </div>
+    </div>
+
+    <div class="board">
+      <div class="state-strip" id="stateStrip">LOADING</div>
+      <div class="period-name" id="periodName">—</div>
+      <div class="countdown-wrap">
+        <div class="countdown" id="countdown">--:--</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="up-next" id="upNext" style="visibility:hidden;">
+        <span class="label">NEXT</span> <span class="name">—</span>
+      </div>
+    </div>
+
+    <div class="today-strip">
+      <div class="today-strip-label">TODAY — <span id="scheduleName">no schedule loaded</span></div>
+      <div class="today-rows" id="todayRows"></div>
+    </div>
+  </div>
+
+  <!-- Settings modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="icon-btn modal-close" id="closeModalBtn" aria-label="Close settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <h2 id="modalTitle">Settings</h2>
+      <p class="sub">Your schedule and theme stay in this browser only.</p>
+
+      <div class="section">
+        <h3>SCHEDULE</h3>
+        <div class="row"><span class="label">Current</span><span class="hint" id="scheduleStatus">none</span></div>
+        <div class="btn-row">
+          <button class="btn file-btn small">Upload schedule.json<input type="file" id="scheduleFile" accept=".json,application/json"></button>
+          <button class="btn small" id="loadSampleScheduleBtn">Load sample</button>
+          <button class="btn small" id="downloadScheduleBtn">Download current</button>
+        </div>
+        <div class="status-msg" id="scheduleMsg"></div>
+      </div>
+
+      <div class="section">
+        <h3>THEME</h3>
+        <div class="preset-grid" id="presetGrid"></div>
+        <div class="btn-row" style="margin-top:10px;">
+          <button class="btn file-btn small">Upload theme.json<input type="file" id="themeFile" accept=".json,application/json"></button>
+          <button class="btn small" id="openBuilderBtn" type="button">Open Theme Builder ↗</button>
+        </div>
+        <div class="status-msg" id="themeMsg"></div>
+      </div>
+
+      <div class="section">
+        <h3>DISPLAY</h3>
+        <div class="row"><span class="label">Particles</span>
+          <label class="switch"><input type="checkbox" id="toggleParticles"><span class="slider"></span></label>
+        </div>
+        <div class="row"><span class="label">Tick sound (each second)</span>
+          <label class="switch"><input type="checkbox" id="toggleTick"><span class="slider"></span></label>
+        </div>
+        <div class="row"><span class="label">Class-change sound</span>
+          <label class="switch"><input type="checkbox" id="toggleChime"><span class="slider"></span></label>
+        </div>
+        <div class="row"><span class="label">Desktop notifications</span>
+          <button class="btn small" id="notifBtn">Enable</button>
+        </div>
+        <div class="row"><span class="label">12-hour clock</span>
+          <label class="switch"><input type="checkbox" id="toggle12h"><span class="slider"></span></label>
+        </div>
+        <div class="row"><span class="label">Background music</span>
+          <button class="btn small" id="musicBtn" disabled>No music in theme</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THIS DEVICE</h3>
+        <div class="row"><span class="label">Remember schedule &amp; theme here</span>
+          <label class="switch"><input type="checkbox" id="togglePersist" checked><span class="slider"></span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="musicAudio" loop></audio>
+
+  <script src="js/theme.js"></script>
+  <script src="js/schedule.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
