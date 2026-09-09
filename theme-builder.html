@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schedulist — Theme Builder</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme-builder.css">
+</head>
+<body class="bg-gradient">
+<div class="builder">
+
+  <!-- ===== CONTROLS ===== -->
+  <div class="controls">
+    <div class="controls-header">
+      <div class="kicker">SCHEDULIST · THEME BUILDER</div>
+      <input type="text" id="themeName" class="theme-name-input" value="Untitled Theme">
+      <div class="btn-row">
+        <button class="btn small" id="newThemeBtn">New</button>
+        <button class="btn file-btn small">Import<input type="file" id="importFile" accept=".json"></button>
+        <button class="btn primary small" id="exportBtn">Export theme.json</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>COLORS</h3>
+      <div class="two-col">
+        <div class="field"><label>Background 1</label><div class="color-field"><input type="color" id="c_bg1"><input type="text" id="c_bg1_hex"></div></div>
+        <div class="field"><label>Background 2</label><div class="color-field"><input type="color" id="c_bg2"><input type="text" id="c_bg2_hex"></div></div>
+        <div class="field"><label>Card</label><div class="color-field"><input type="color" id="c_card"><input type="text" id="c_card_hex"></div></div>
+        <div class="field"><label>Text</label><div class="color-field"><input type="color" id="c_text"><input type="text" id="c_text_hex"></div></div>
+        <div class="field"><label>Text (dim)</label><div class="color-field"><input type="color" id="c_textDim"><input type="text" id="c_textDim_hex"></div></div>
+        <div class="field"><label>Accent</label><div class="color-field"><input type="color" id="c_accent"><input type="text" id="c_accent_hex"></div></div>
+        <div class="field"><label>Accent 2</label><div class="color-field"><input type="color" id="c_accent2"><input type="text" id="c_accent2_hex"></div></div>
+      </div>
+      <div class="field">
+        <label>Background style</label>
+        <div class="chip-row" id="bgTypeChips">
+          <button class="chip" data-v="gradient">Gradient</button>
+          <button class="chip" data-v="solid">Solid</button>
+          <button class="chip" data-v="image">Image</button>
+        </div>
+      </div>
+      <div class="field" id="gradAngleField">
+        <label>Gradient angle <span class="range-value" id="angleVal">165°</span></label>
+        <input type="range" id="bgAngle" min="0" max="360" value="165">
+      </div>
+      <div class="field" id="bgImageField" style="display:none;">
+        <div class="upload-drop" id="bgImageDrop">
+          Click or drop a background image
+          <input type="file" id="bgImageFile" accept="image/*">
+          <img id="bgImageThumb" class="thumb-preview" style="display:none;">
+        </div>
+        <div class="field" style="margin-top:8px;">
+          <label>Dim overlay <span class="range-value" id="dimVal">0%</span></label>
+          <input type="range" id="bgDim" min="0" max="80" value="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>TYPE &amp; SHAPE</h3>
+      <div class="field">
+        <label>Display / countdown font</label>
+        <div class="chip-row" id="fontDisplayChips">
+          <button class="chip" data-v="mono-slab">Mono Slab</button>
+          <button class="chip" data-v="serif-editorial">Editorial Serif</button>
+          <button class="chip" data-v="rounded-friendly">Rounded</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Label font</label>
+        <div class="chip-row" id="fontLabelChips">
+          <button class="chip" data-v="system-sans">System Sans</button>
+          <button class="chip" data-v="serif-editorial">Editorial Serif</button>
+          <button class="chip" data-v="rounded-friendly">Rounded</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Corner radius <span class="range-value" id="radiusVal">4px</span></label>
+        <input type="range" id="radius" min="0" max="24" value="4">
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>PARTICLES</h3>
+      <div class="row"><span class="label">Enabled</span>
+        <label class="switch"><input type="checkbox" id="particlesEnabled"><span class="slider"></span></label>
+      </div>
+      <div class="field">
+        <label>Type</label>
+        <div class="chip-row" id="particleTypeChips">
+          <button class="chip" data-v="none">None</button>
+          <button class="chip" data-v="snow">Snow</button>
+          <button class="chip" data-v="stars">Stars</button>
+          <button class="chip" data-v="bubbles">Bubbles</button>
+          <button class="chip" data-v="embers">Embers</button>
+          <button class="chip" data-v="confetti">Confetti</button>
+          <button class="chip" data-v="fireflies">Fireflies</button>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label>Density <span class="range-value" id="densityVal">40</span></label><input type="range" id="particleDensity" min="4" max="150" value="40"></div>
+        <div class="field"><label>Speed <span class="range-value" id="speedVal">1.0</span></label><input type="range" id="particleSpeed" min="1" max="30" value="10"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>TICK ANIMATION</h3>
+      <div class="field">
+        <label>How the countdown updates each second</label>
+        <div class="chip-row" id="tickStyleChips">
+          <button class="chip" data-v="none">None</button>
+          <button class="chip" data-v="squash">Squash</button>
+          <button class="chip" data-v="rotational">Rotational</button>
+        </div>
+      </div>
+      <button class="mini-btn" id="previewTickBtn" type="button">▶ Preview tick</button>
+    </div>
+
+    <div class="section">
+      <h3>SOUNDS</h3>
+      <div class="field">
+        <div class="sound-row">
+          <span class="name">Tick (per second)</span>
+          <label class="switch"><input type="checkbox" id="tickEnabled"><span class="slider"></span></label>
+        </div>
+        <div class="upload-drop" id="tickDrop">Upload custom tick sound (optional — else synth click)
+          <input type="file" id="tickFile" accept="audio/*">
+        </div>
+        <audio class="mini" id="tickPreview" controls style="display:none;margin-top:6px;"></audio>
+      </div>
+      <div class="field">
+        <div class="sound-row">
+          <span class="name">Class-change chime</span>
+          <label class="switch"><input type="checkbox" id="chimeEnabled" checked><span class="slider"></span></label>
+        </div>
+        <div class="upload-drop" id="chimeDrop">Upload custom chime (optional — else synth chime)
+          <input type="file" id="chimeFile" accept="audio/*">
+        </div>
+        <audio class="mini" id="chimePreview" controls style="display:none;margin-top:6px;"></audio>
+        <button class="mini-btn" id="previewChimeBtn" style="margin-top:6px;">▶ Preview chime</button>
+      </div>
+      <div class="field">
+        <div class="sound-row">
+          <span class="name">Background music</span>
+        </div>
+        <div class="upload-drop" id="musicDrop">Upload background music loop (optional)
+          <input type="file" id="musicFile" accept="audio/*">
+        </div>
+        <audio class="mini" id="musicPreview" controls style="display:none;margin-top:6px;"></audio>
+        <div class="field" style="margin-top:8px;">
+          <label>Music volume <span class="range-value" id="volVal">40%</span></label>
+          <input type="range" id="musicVolume" min="0" max="100" value="40">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>SAVED IN THIS BROWSER</h3>
+      <div class="gallery-list" id="galleryList"></div>
+      <div class="btn-row" style="margin-top:10px;">
+        <button class="btn small" id="saveGalleryBtn">Save to gallery</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>USE IT</h3>
+      <p class="hint" style="line-height:1.5;">Export this theme, then in Schedulist open <strong>Settings → Theme → Upload theme.json</strong> to apply it.</p>
+      <a class="btn small" href="index.html" target="_blank">Open Schedulist ↗</a>
+    </div>
+  </div>
+
+  <!-- ===== PREVIEW ===== -->
+  <div class="preview-pane" id="previewPane">
+    <div id="bgImageLayer" aria-hidden="true"></div>
+    <div id="bgDimLayer" aria-hidden="true"></div>
+    <div id="particleCanvasWrap" aria-hidden="true"><canvas id="particleCanvas"></canvas></div>
+    <div class="preview-inner">
+      <div class="preview-note">LIVE PREVIEW</div>
+      <div class="app" style="justify-content:center;">
+        <div class="board">
+          <div class="state-strip">NOW IN SESSION</div>
+          <div class="period-name">Period 6 — Physics</div>
+          <div class="countdown-wrap"><div class="countdown" id="previewCountdown">18:42<span class="unit">left</span></div></div>
+          <div class="progress-track"><div class="progress-fill" style="width:62%;"></div></div>
+          <div class="up-next"><span class="label">NEXT</span> <span class="name">Period 7 — PE at 14:30</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/theme-builder.js"></script>
+</body>
+</html>
